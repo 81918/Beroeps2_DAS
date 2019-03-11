@@ -1,0 +1,7 @@
+# Beroeps2_DAS
+website voor de aquarium specialist
+
+Voor betaling system:
+Molie
+mpdf (https://github.com/mpdf/mpdf) proberen anders fpdf
+mailing met phpmailer
