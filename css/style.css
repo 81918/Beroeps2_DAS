@@ -1,0 +1,57 @@
+/*#############################################################################
+								R E S E T
+#############################################################################*/
+html, body, header, main, footer, div, article, p, h1, header ul
+{
+	padding: 0;
+	margin: 0;
+}
+/*#############################################################################
+							S T A N D A A R T
+#############################################################################*/
+*
+{
+	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; 
+}
+html
+{
+	box-sizing: border-box;
+	height: 100%;
+}
+*, *:before, *:after
+{
+  box-sizing: inherit;
+}
+body
+{
+	position: relative;
+	min-height: 100%;
+}
+main
+{
+	padding-bottom: 100px;
+}
+footer
+{
+	height: 100px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+a
+{
+	cursor: pointer;
+	color: black;
+	text-decoration: none;
+}
+/*#############################################################################
+							N A V I G A T I E
+#############################################################################*/
+header ul
+{
+	list-style-type: none;
+}
+header li
+{
+	display: inline-block;
+}

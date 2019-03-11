@@ -1,0 +1,49 @@
+﻿De Aquarium Specialist
+
+Dingen af:
+
+Javascript
+- toevoeg velden.
+- nummers veranderen naar currency value (product_toevoeg.php)
+
+php
+- uitlees
+- edit
+- crud
+	- forms
+		- create product
+		- create spec
+		- spec edit
+
+		- delete spec
+		- delete product
+	- verwerk
+		- create product verwerk
+		- create spec verwerk
+		- spec verwerk
+
+		- delete spec verwerk 	
+		- delete product verwerk
+
+todo
+- beveileng
+	- levels
+- webshop
+	- cart
+	- index
+	- product list 
+	- product filter (extra)
+	- product details
+	- contact
+	- order melding/ paypal (extra)
+- crud
+	- forms
+		- aanmeld
+		- my orders
+		- my orders refund
+		- login
+		- product edit
+		- pictures toevoeg
+		- pictures delete
+	- verwerk
+		- uitlog
