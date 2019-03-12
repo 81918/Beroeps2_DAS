@@ -41,11 +41,11 @@ session_start();
 							{
 								echo 20 . $i[0] . '-' . $i[1] . '-' . $i[2];
 							}
-							elseif ($year < 1000)
+							else if ($year < 1000)
 							{
 								echo 2 . $i[0] . '-' . $i[1] . '-' . $i[2];
 							}
-							elseif ($year > 1000)
+							else if ($year > 1000)
 							{
 								echo $i[0] . '-' . $i[1] . '-' . $i[2];
 							}
@@ -89,34 +89,18 @@ session_start();
 					</tr>
 				</table>
 			</form>
-			<form action="login.php" method="post" id="login">
-				<table>
-					<tr>
-						<td>Gebruikersnaam:</td>
-						<td><input type="text" name="gebruikersnaam" maxlength="32"></td>
-					</tr>
-					<tr>
-						<td>Wachtwoord:</td>
-						<td><input type="password" name="wachtwoord" maxlength="50"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" name="submit" value="meld aan"></td>
-					</tr>
-				</table>
-			</form>
 		</div>
 	<?php
 		}
-		elseif($_SESSION['level'] == 1)
-		{
+		elseif($_SESSION['level'] == 1) {
+			// 
 			echo "<h1>OOPS!</h1>";
-			echo "<p class='error'>U hoord hier niet te zijn! <a href='../index.php'>ga naar home</a></p>";
+			echo "<p class='error'>U hoord hier niet te zijn! <a href='../../index.php'>Ga naar home</a></p>";
 		}
 		else
 		{
 			echo "<h1>OOPS!</h1>";
-			echo "<p class='error'>U hoord hier niet te zijn! <a href='uitlees_admin.php'>Ga naar uitlees</a>.</p>";
+			echo "<p class='error'>U hoord hier niet te zijn! <a href='../index.php'>Ga naar uitlees</a>.</p>";
 		}
 
 	?>

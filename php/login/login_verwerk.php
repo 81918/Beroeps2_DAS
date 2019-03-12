@@ -13,6 +13,7 @@
 		<nav>
 			<h1>Login</h1>
 			<?php
+
 				//lees het config-bestand
 				require('config_beroeps2.inc.php');
 
@@ -27,7 +28,7 @@
 					$wachtwoord = md5($wachtwoord);
 
 					//maak de conrole-query
-					$query = "SELECT * FROM De_aquarium_specialist_login
+					$query = "SELECT * FROM DAS_login
 							  WHERE gebruikersnaam = '$gebruikersnaam'
 							  AND wachtwoord = '$wachtwoord'";
 					
@@ -35,31 +36,33 @@
 					$result = mysqli_query($mysqli, $query);
 
 					//controleer of de login correct was
-					if (mysqli_num_rows($result) == 1)
-					{
+					if (mysqli_num_rows($result) == 1) {
+
 						$row = mysqli_fetch_array($result);
 						$_SESSION['level'] = $row['level'];
-						if($row['level'] == 1)
-						{
+
+						if($row['level'] == 1) {
+
+							// redirect naar index (main home pagina)
 							header("Location:../../index.php");
-						}
-						elseif ($row['level'] == 2)
-						{
+
+						} elseif ($row['level'] == 2) {
+
+							// redirect naar homepagina van admin
 							header("Location:../admin/index.php");
-						}
-						else
-						{
+
+						} else {
+							// een andere level dan 0, 1 of 2
 							echo "<p>OOPS, er is iets fout gegaan!</p>";
+
 						}
-					}
-					else
-					{
-						//login incorrect, terug naar het login-formulier
+					} else {
+						//login incorrect, terug naar het login-formulier (alleen login form als je probeerde inteloggen bij aanmeld_login)
 						header("Location:login.php");
+					
 					}
-				}
-				else
-				{
+				} else {
+
 					echo "<p>Niet alle velden zijn ingevuld!</p>";
 					//exit;
 				}

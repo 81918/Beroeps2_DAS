@@ -8,10 +8,10 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="../index.php">Home</a></li>
-				<li><a href="product_toevoeg.php">Product toevoegen</a></li>
-				<li><a href="spec_toevoeg.php">Specificatie toevoegen</a></li>
-				<li><a href="uitlees_admin.php">Uitlees</a></li>
+				<li><a href="../../index.php">Home</a></li>
+				<li><a href="../product/product_toevoeg.php">Product toevoegen</a></li>
+				<li><a href="../specificatie/spec_toevoeg.php">Specificatie toevoegen</a></li>
+				<li><a href="../uitlees_admin.php">Uitlees</a></li>
 			</ul>
 		</nav>
 	</header>

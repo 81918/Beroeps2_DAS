@@ -1,3 +1,12 @@
+<?php
+session_start();
+if ($_SESSION['level'] == 2) {
+	
+	// redirect naar de admin index
+	header("Location:php/admin/index.php");
+
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,20 +17,35 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="">Home</a></li>
-				<li><a href="php/login/login.php">Login</a></li>
-				<li><a href="">Shoppen</a></li>
-				<li><a href="php/login/aanmeld_login.php">Register</a></li>
+				<?php 
+
+					if ($_SESSION['level'] == 1) {
+
+						// links voor ingelogde bezoekers
+						echo "<li><a href='index.php'>Home</a></li>";
+						echo "<li><a href=''>Shoppen</a></li>";
+						echo "<li><a href='php/login/logout.php'>Uitloggen</a></li>";
+
+					} else {
+
+						// links voor niet ingelogde bezoekers
+						echo "<li><a href='index.php'>Home</a></li>";
+						echo "<li><a href=''>Shoppen</a></li>";
+						echo "<li><a href='php/login/login.php'>Login</a></li>";
+						echo "<li><a href='php/login/aanmeld.php'>Register</a></li>";
+
+					}
+				?>
+				
 			</ul>
 		</nav>
 	</header>
 	
 	<main>
-
 		<div class="Trailer">
 		<!-- <video width="1280	 height="400" controls> -->
 		<!-- test -->
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/2aWHg7lgjZs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/2aWHg7lgjZs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 		<!-- </video> -->
 		</div>
 	</main>
