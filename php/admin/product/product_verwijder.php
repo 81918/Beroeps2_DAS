@@ -16,7 +16,7 @@
 			{
 				require_once('../../config_beroeps2.inc.php');
 				//lees het lid uit de database
-				$query = "SELECT * FROM De_aquarium_specialist_shop_products WHERE id = '" . $id . "'";
+				$query = "SELECT * FROM DAS_products WHERE id = '" . $id . "'";
 				if($result = mysqli_query($mysqli, $query))
 				{
 					$row = mysqli_fetch_array($result);

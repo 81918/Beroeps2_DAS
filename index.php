@@ -1,11 +1,5 @@
 <?php
 session_start();
-if ($_SESSION['level'] == 2) {
-	
-	// redirect naar de admin index
-	header("Location:php/admin/index.php");
-
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,8 +12,13 @@ if ($_SESSION['level'] == 2) {
 		<nav>
 			<ul>
 				<?php 
+					if ($_SESSION['level'] == 2) {
+						
+						// redirect naar de admin index
+						header("Location:php/admin/index.php");
 
-					if ($_SESSION['level'] == 1) {
+					}
+					elseif ($_SESSION['level'] == 1) {
 
 						// links voor ingelogde bezoekers
 						echo "<li><a href='index.php'>Home</a></li>";

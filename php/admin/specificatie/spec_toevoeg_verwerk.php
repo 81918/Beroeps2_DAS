@@ -32,7 +32,7 @@
 			//Voor elk veld dat toegevoegt is doe dit
 			foreach ($spec_categorie AS $key => $value)
 			{
-				$query = "INSERT INTO De_aquarium_specialist_shop_product_specificaties(spec_categorie,spec_naam,spec,product_id)
+				$query = "INSERT INTO DAS_specificaties(spec_categorie,spec_naam,spec,product_id)
 				VALUES ('"
 				. $mysqli->real_escape_string($value) .
 				"','"

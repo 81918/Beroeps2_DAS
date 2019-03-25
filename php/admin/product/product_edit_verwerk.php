@@ -13,7 +13,7 @@
 		$product_nummer = $_POST['product_nummer'];
 		$prijs = $_POST['prijs'];
 
-		$query = "UPDATE De_aquarium_specialist_shop_products SET product_naam = '$product_naam', prijs = $prijs, product_nummer = $product_nummer WHERE id = $id";
+		$query = "UPDATE DAS_products SET product_naam = '$product_naam', prijs = $prijs, product_nummer = $product_nummer WHERE id = $id";
 
 		$result = mysqli_query($mysqli, $query);
 		if($result)

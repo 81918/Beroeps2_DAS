@@ -18,7 +18,7 @@
 		 | laat het product zien
 		 |
 		 *___________________________________*/
-		$query = "SELECT * FROM De_aquarium_specialist_shop_products WHERE id = '" . $id . "'";
+		$query = "SELECT * FROM DAS_products WHERE id = '" . $id . "'";
 		if($result = mysqli_query($mysqli, $query))
 		{
 			if (mysqli_num_rows($result) == 1)
@@ -32,7 +32,7 @@
 					echo "<p>" . $row['product_nummer'] . "</p>";
 					echo "</div>";
 				}
-				$query2 = "SELECT * FROM De_aquarium_specialist_shop_product_specificaties WHERE product_id = " . $id . " GROUP BY spec_categorie";
+				$query2 = "SELECT * FROM DAS_specificaties WHERE product_id = " . $id . " GROUP BY spec_categorie";
 
 
 				/*___________________________________
@@ -89,7 +89,7 @@
 						echo "<td>&nbsp;</td>";
 						echo "<td>&nbsp;</td>";
 						echo "</tr>";
-						$query3 = "SELECT * FROM De_aquarium_specialist_shop_product_specificaties WHERE spec_categorie = '" . $row2['spec_categorie'] . "'";
+						$query3 = "SELECT * DAS_specificaties WHERE spec_categorie = '" . $row2['spec_categorie'] . "'";
 						if($result3 = mysqli_query($mysqli, $query3))
 						{
 							while ($row3 = mysqli_fetch_array($result3))

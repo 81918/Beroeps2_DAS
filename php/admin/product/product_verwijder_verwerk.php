@@ -14,7 +14,7 @@
 			{
 				require('config_beroeps2.inc.php'); 
 
-				$query1 = "DELETE FROM De_aquarium_specialist_shop_products WHERE id = '" . $id . "'";
+				$query1 = "DELETE FROM DAS_products WHERE id = '" . $id . "'";
 				if(mysqli_query($mysqli, $query1))
 				{
 					echo "<p class='no_error'>Het product is verwijderd.</p>";
@@ -24,7 +24,7 @@
 					echo"<p class='error'>Het product kon niet verwijderd worden.</p>";
 				}
 
-				$query2 = "DELETE FROM De_aquarium_specialist_shop_product_specificaties WHERE product_id = " . $id;
+				$query2 = "DELETE FROM DAS_specificaties WHERE product_id = " . $id;
 				if(mysqli_query($mysqli, $query2))
 				{
 					echo "<p class='no_error'>Alle specificaties zijn verwijderd.</p>";
@@ -34,7 +34,7 @@
 					echo "<p class='error'>Specificaties konden niet verwijderd worden.</p>";
 				}
 
-				$query3 = "DELETE FROM De_aquarium_specialist_productbeschrijving WHERE product_id = '" . $id . "'";
+				$query3 = "DELETE FROM DAS_productbeschrijving WHERE product_id = '" . $id . "'";
 				if(mysqli_query($mysqli, $query3))
 				{
 					echo "<p class='no_error'>Het beschrijving is verwijderd.</p>";

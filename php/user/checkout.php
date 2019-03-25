@@ -31,7 +31,7 @@ session_start();
 			foreach($_SESSION['winkelwagen'] as $id=> $product)
 			{
 				echo "<tr>";
-				$query = "SELECT * FROM De_aquarium_specialist_shop_products WHERE id = " . $product['product_id'];
+				$query = "SELECT * FROM DAS_products WHERE id = " . $product['product_id'];
 				$result = mysqli_query($mysqli, $query);
 				$data = mysqli_fetch_array($result);
 

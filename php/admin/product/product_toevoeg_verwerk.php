@@ -38,7 +38,7 @@
 					{
 						if (is_numeric($product_nummer))
 						{
-							$query = "INSERT INTO De_aquarium_specialist_shop_products (id ,product_naam ,prijs ,product_nummer) VALUES (NULL ,'$product_naam','$prijs2','$product_nummer')";
+							$query = "INSERT INTO DAS_products (id ,product_naam ,prijs ,product_nummer) VALUES (NULL ,'$product_naam','$prijs2','$product_nummer')";
 							//controleer of query is uitgevoerd
 							if (mysqli_query($mysqli, $query))
 							{

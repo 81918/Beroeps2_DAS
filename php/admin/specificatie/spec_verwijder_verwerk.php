@@ -28,12 +28,12 @@
 				{
 					require_once('config_beroeps2.inc.php');
 
-					$query1 = "SELECT * FROM De_aquarium_specialist_shop_product_specificaties WHERE id = '" . $mysqli->real_escape_string($specs[$key]) . "'";
+					$query1 = "SELECT * FROM DAS_specificaties WHERE id = '" . $mysqli->real_escape_string($specs[$key]) . "'";
 					if($result = mysqli_query($mysqli, $query1))
 					{
 						$row = mysqli_fetch_array($result);
 
-						$query2 = "DELETE FROM De_aquarium_specialist_shop_product_specificaties WHERE id = '" . $mysqli->real_escape_string($specs[$key]) . "'";
+						$query2 = "DELETE FROM DAS_specificaties WHERE id = '" . $mysqli->real_escape_string($specs[$key]) . "'";
 
 						if(mysqli_query($mysqli, $query2))
 						{

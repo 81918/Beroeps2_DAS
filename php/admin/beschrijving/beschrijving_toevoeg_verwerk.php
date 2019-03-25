@@ -6,20 +6,23 @@
 <body>
 	<?php
 	require('config_beroeps2.inc.php');
-	if (isset($_POST['submit']))
-	{
+
+	if (isset($_POST['submit'])) {
+
+		// 
 		$beschrijving = $_POST['beschrijving'];
 		$id = $_POST['id'];
-		
+
 		if (is_numeric($id))
 		{
+			
 			if (strlen($beschrijving) > 0)
 			{
-				$query1 = "SELECT * FROM De_aquarium_specialist_productbeschrijving WHERE product_id = '" . $id . "'";
+				$query1 = "SELECT * FROM DAS_productbeschrijving WHERE product_id = '" . $id . "'";
 				$result1 = mysqli_query($mysqli, $query1);
 				if (mysqli_num_rows($result1) == 0)
 				{
-					$query2 = "INSERT INTO De_aquarium_specialist_productbeschrijving (id, beschrijving, product_id) VALUES (NULL ,'$beschrijving','$id')";
+					$query2 = "INSERT INTO DAS_productbeschrijving (id, beschrijving, product_id) VALUES (NULL ,'$beschrijving','$id')";
 					//controleer of query is uitgevoerd
 					$result2 = mysqli_query($mysqli, $query2);
 					if ($result2)

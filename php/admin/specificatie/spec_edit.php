@@ -21,13 +21,13 @@
 	$id = $_GET['id'];
 	require('config_beroeps2.inc.php');
 
-	$query = "SELECT * FROM De_aquarium_specialist_shop_product_specificaties WHERE product_id = " . $id;
+	$query = "SELECT * FROM DAS_specificaties WHERE product_id = " . $id;
 	$result = mysqli_query($mysqli, $query);
 	if($result)
 	{
 		if (mysqli_num_rows($result) >= 1)
 		{
-			$query = "SELECT * FROM De_aquarium_specialist_shop_product_specificaties WHERE product_id = " . $id;
+			$query = "SELECT * FROM DAS_specificaties WHERE product_id = " . $id;
 			if($result = mysqli_query($mysqli, $query))
 			{
 				if (mysqli_num_rows($result) >= 1)

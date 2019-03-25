@@ -11,7 +11,7 @@
 <body>
 	<?php
 	require_once('../../config_beroeps2.inc.php'); 
-	$query = "SELECT * FROM De_aquarium_specialist_shop_products WHERE id = " . $id;
+	$query = "SELECT * FROM DAS_products WHERE id = " . $id;
 	$result = mysqli_query($mysqli, $query);
 	if($result)
 	{

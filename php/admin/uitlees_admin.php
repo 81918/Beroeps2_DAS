@@ -35,7 +35,7 @@ session_start();
 		if ($_SESSION['level'] == 2)
 		{
 			require_once('../../config_beroeps2.inc.php');
-			$query = "SELECT * FROM De_aquarium_specialist_shop_products";
+			$query = "SELECT * FROM DAS_products";
 			if($result = mysqli_query($mysqli, $query))
 			{
 				echo "<table>";
@@ -70,11 +70,11 @@ session_start();
 						echo "</td>";
 
 						echo "<td>";
-						$query1 = "SELECT * FROM De_aquarium_specialist_shop_products WHERE id =" . $row['id'];
+						$query1 = "SELECT * FROM DAS_products WHERE id =" . $row['id'];
 						$result1 = mysqli_query($mysqli, $query1);
 						if (mysqli_num_rows($result1) == 1)
 						{
-							$query2 = "SELECT * FROM De_aquarium_specialist_productbeschrijving WHERE product_id = " . $row['id'];
+							$query2 = "SELECT * FROM DAS_productbeschrijving WHERE product_id = " . $row['id'];
 							$result2 = mysqli_query($mysqli, $query2);
 							if (mysqli_num_rows($result2) == 0)
 							{
