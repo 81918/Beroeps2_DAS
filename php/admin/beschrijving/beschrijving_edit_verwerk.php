@@ -1,3 +1,7 @@
+<?php 
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,69 +12,124 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="../index.php">Home</a></li>
-				<li><a href="product_toevoeg.php">Product toevoegen</a></li>
-				<li><a href="spec_toevoeg.php">Specificatie toevoegen</a></li>
-				<li><a href="uitlees_admin.php">Uitlees</a></li>
+				<li><a href="../../../index.php">Home</a></li>
+				<li><a href="../product/product_toevoeg.php">Product toevoegen</a></li>
+				<li><a href="../uitlees_admin.php">Uitlees</a></li>
 			</ul>
 		</nav>
 	</header>
 	
 	<main>
 	<?php
+	if ($_SESSION['level'] == 2) {
+		require('../../../config_beroeps2.inc.php');
 
-	require('config_beroeps2.inc.php');
+		if (isset($_POST['submit'])) {
+			
+			// variablen
+			$beschrijving = mysqli_real_escape_string($mysqli, htmlentities( $_POST['beschrijving'] ) );
+			$id = $_POST['id'];
 
-	if (isset($_POST['submit'])) {
-		
-		// variablen
-		$beschrijving = $_POST['beschrijving'];
-		$id = $_POST['id'];
-		
-		// check of de id wel een nummer is
-		if (is_numeric($id)) {
+			// check of de key van het formulier is opgestuurd en het zelfe is het session variable
+			if (isset($_SESSION['token']) && $_SESSION['token'] == $_POST['csrf_token']) {
 
-			if (strlen($beschrijving) > 0) {
+				// check of input velden niet leeg zijn
+				if (!empty($_POST['beschrijving']) && !empty($_POST['id'])) {
 
-				// query
-				$query1 = "SELECT * FROM DAS_productbeschrijving WHERE product_id = " . $id;
-				
-				// voer de query uit
-				$result1 = mysqli_query($mysqli, $query1);
+					// check of de id wel een nummer is
+					if (is_numeric($id)) {
 
-				// check of de query succesvol is uit gevoerd
-				if ($result1) {
+						// check of beschrijving wel is ingevuld
+						if (strlen($beschrijving) > 0) {
 
-					// check of er precies 1 resultaat is 
-					if (mysqli_num_rows($result1) == 1) {
+							// query
+							$query = "SELECT * FROM DAS_productbeschrijving WHERE product_id = ?";
 
-						// query
-						$query2 = sprintf("UPDATE DAS_productbeschrijving SET beschrijving = '%s' WHERE product_id = '%s'",  mysqli_real_escape_string($beschrijving), mysqli_real_escape_string($id));
+							// maak prepare statment
+							$stmt = mysqli_stmt_init($mysqli);
 
-						// voer de query uit
-						$result2 = mysqli_query($mysqli, $query2);
+							// voorberijden op prepare statment
+							if (mysqli_stmt_prepare($stmt, $query)) {
+								
+								mysqli_stmt_bind_param($stmt, "i", $id);
 
-						// check of het goed is uitgevoerd
-						if ($result2) {
-							echo "<p class='no_error'>Beschrijving is veranderd.</p>";
+								$result1 = mysqli_stmt_execute($stmt);
+								// check of query niet is uigevoerd
+								if (!$result1) {
+
+									echo "<p class='error'>Er ging iets fout, beschrijving kon niet gevonden worden!</p>";
+
+								}
+
+							} else {
+
+								echo "<p class='error'>Kon geen voorberijding maken op prepare statement</p>";
+							}
+
+
+							// check of de query succesvol is uit gevoerd
+							if ($result1) {
+
+								// query
+								$query2 = "UPDATE DAS_productbeschrijving SET beschrijving = ? WHERE product_id = ?";
+
+								// voorberijden op prepare statment
+								if (mysqli_stmt_prepare($stmt, $query2)) {
+									
+									// verbind variable met prepare statements
+									mysqli_stmt_bind_param($stmt, "si", $beschrijving, $id);
+
+									// voer de query uit
+									$result2 = mysqli_stmt_execute($stmt);
+
+									// check of het goed is uitgevoerd
+									if ($result2) {
+
+										echo "<p class='no_error'>Beschrijving is veranderd.</p>";
+
+									} else {
+
+										echo "<p class='error'>Er ging iets fout, beschrijving kon niet veranderd worden!</p>";
+
+									}
+								} else {
+
+									echo "<p class='error'>Kon geen voorberijding maken op prepare statement</p>";
+								}
+							} else {
+
+								echo "<p class='error'>Dit product bestaat niet!</p>";
+
+							}
+
 						} else {
-							echo "<p class='error'>Er ging iets fout, beschrijving kon niet veranderd worden!</p>";
+
+							echo "<p class='error'>We missen een beschrijving.</p>";
+
 						}
 					} else {
-						echo "<p class='error'>Er klopt iets niet 0 of meer dan 1 product gevonden!</p>";
+
+						echo "<p class='error'>Het product bestaat niet.</p>";
+
 					}
 				} else {
-					echo "<p class='error'>Dit product bestaat niet!</p>";
+
+					echo "<p class='error'>Er ontbreekt iets waar van we de gegevends binnen hebben gekregen.</p>";
+
 				}
 			} else {
-				echo "<p class='error'>We missen een beschrijving.</p>";
+				echo "<p class='error'>U heeft het formulier niet ingevuld.</p>";
 			}
 		} else {
-			echo "<p class='error'>Het product bestaat niet.</p>";
+
+			echo "<p class='error'>Wij hebben geen gegevens binnen gekregen.</p>";
+
 		}
 	} else {
-		echo "<p class='error'>Wij hebben geen gegevens binnen gekregen.</p>";
+		echo "<h1>OOPS!</h1>";
+		echo "<p class='error'>U hoord hier niet te zijn! <a href='../index.php'>ga naar home</a></p>";
 	}
+
 	?>
 	</main>
 
