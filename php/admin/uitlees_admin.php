@@ -85,9 +85,15 @@ session_start();
 
 						}
 
+						$query3 = "SELECT * FROM DAS_productbeschrijving WHERE product_id = " . $row['id'];
+						$result3 = mysqli_query($mysqli, $query3);
+
+						if (mysqli_num_rows($result3) == 1) {
+
+							echo "<a href='beschrijving/beschrijving_edit.php?id=" . $row['id'] . "'><img src='../../icons/icon-edit.png' alt='edit' class='icon'></a> ";
+						}
 					}
-					
-					echo "<a href='beschrijving/beschrijving_edit.php?id=" . $row['id'] . "'><img src='../../icons/icon-edit.png' alt='edit' class='icon'></a> ";
+				
 					echo "</td>";
 					echo "";
 				}
@@ -97,7 +103,7 @@ session_start();
 		else
 		{
 			echo "<h1>OOPS!</h1>";
-			echo "<p class='error'>U hoord hier niet te zijn! <a href='../index.php'>ga naar home</a></p>";
+			echo "<p class='error'>U hoord hier niet te zijn! <a href='../../index.php'>ga naar home</a></p>";
 		}
 		?>
 

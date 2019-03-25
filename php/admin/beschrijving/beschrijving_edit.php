@@ -30,6 +30,8 @@ $_SESSION['token'] = $token;
 	if ($_SESSION['level'] == 2) {
 		// de id die je krijg via link
 		if (!empty($_GET['id']) && isset($_GET['id'])) {
+
+			// check of het id wel een nummer is 
 			$id = $_GET['id'];
 			if (is_numeric($id)) {
 				require('../../../config_beroeps2.inc.php');
