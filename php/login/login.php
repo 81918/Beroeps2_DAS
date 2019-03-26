@@ -1,3 +1,13 @@
+ <?php
+session_start();
+
+// maak een encrypted key
+$token = bin2hex(openssl_random_pseudo_bytes(32));
+
+// zet de key in een session
+$_SESSION['token'] = $token;
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +15,7 @@
 </head>
 <body>
 	<form action="login_verwerk.php" method="post">
+		<input type="hidden" name="csrf_token" value="<?php echo $token;?>">
 		<!-- stuur de key door -->
 		<table>
 			<tr>

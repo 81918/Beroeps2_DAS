@@ -56,7 +56,7 @@ session_start();
 						if ((time() - 1800) > $_SESSION["timestamp"]) {
 
 							// te lang geleden, logout
-							header('Location:logout.php');
+							header('Location:php/login/logout.php');
 
 						} else {
 

@@ -13,58 +13,88 @@
 		<nav>
 			<h1>Login</h1>
 			<?php
+				if (isset($_POST['submit'])) {
 
-				//lees het config-bestand
-				require('config_beroeps2.inc.php');
+					// check of de key van het formulier is opgestuurd en het zelfe is het session variable
+					if (isset($_SESSION['token']) && $_SESSION['token'] == $_POST['csrf_token'])
+					{
+						//lees alle formuliervelden
+						$gebruikersnaam = $_POST['gebruikersnaam'];
+						$wachtwoord = $_POST['wachtwoord'];
 
-				//lees alle formuliervelden
-				$gebruikersnaam = $_POST['gebruikersnaam'];
-				$wachtwoord = $_POST['wachtwoord'];
+						// controleer of alle formulieren waren ingevuld
+						if (!empty($gebruikersnaam) && !empty($wachtwoord)) {
 
-				// controleer of alle formulieren waren ingevuld
-				if (strlen($gebruikersnaam) > 0 && strlen($wachtwoord) > 0)
-				{
-					//versleutel het wachtwoord
-					$wachtwoord = md5($wachtwoord);
 
-					//maak de conrole-query
-					$query = "SELECT * FROM DAS_login
-							  WHERE gebruikersnaam = '$gebruikersnaam'
-							  AND wachtwoord = '$wachtwoord'";
-					
-					//voer de query uit 
-					$result = mysqli_query($mysqli, $query);
+							//lees het config-bestand
+							require('../../config_beroeps2.inc.php');
 
-					//controleer of de login correct was
-					if (mysqli_num_rows($result) == 1) {
+							//versleutel het wachtwoord
+							$wachtwoord = md5(mysqli_real_escape_string($mysqli, htmlentities($wachtwoord)));
+							$gebruikersnaam = mysqli_real_escape_string($mysqli, htmlentities($gebruikersnaam));
 
-						$row = mysqli_fetch_array($result);
-						$_SESSION['level'] = $row['level'];
+							//maak de controle-query
+							$query = "SELECT level FROM DAS_login
+									  WHERE gebruikersnaam = ?
+									  AND wachtwoord = ?";
+							
+							// check of de voorberijding op een statment gelukt is 
+							if ($stmt = mysqli_prepare($mysqli, $query)){
 
-						if($row['level'] == 1) {
+								// bind de vraagtekens aan een variable
+								mysqli_stmt_bind_param($stmt, "ss", $gebruikersnaam, $wachtwoord);
 
-							// redirect naar index (main home pagina)
-							header("Location:../../index.php");
+								if ($result1 = mysqli_stmt_execute($stmt)) {
 
-						} elseif ($row['level'] == 2) {
+									// buffer data
+									mysqli_stmt_store_result($stmt);
 
-							// redirect naar homepagina van admin
-							header("Location:../admin/index.php");
+									//controleer of de login correct was
+									if (mysqli_stmt_num_rows($stmt) == 1) {
 
+										// zet de resultaat in een variable
+										mysqli_stmt_bind_result($stmt, $level);
+
+										// vraag de informatie op
+										mysqli_stmt_fetch ($stmt);
+
+										$_SESSION['level'] = $level;
+
+										if($_SESSION['level'] == 1) {
+
+											// redirect naar index
+											header("Location:../../index.php");
+
+										} elseif ($_SESSION['level'] == 2) {
+
+											// redirect naar homepagina van admin
+											header("Location:../admin/index.php");
+
+										} else {
+											// een andere level dan 0, 1 of 2
+											echo "<p>OOPS, er is iets fout gegaan!</p>";
+
+										}
+									} else {
+										//login incorrect, terug naar het login-formulier (alleen login form als je probeerde inteloggen bij aanmeld_login)
+										header("Location:login.php");
+									
+									}
+								} else {
+									echo "<p class='error'>Er was een probleem met het uitvoren van de query!</p>";
+								}
+							} else {
+								echo "<p class='error'>Er zijn problemen met het voorberijden op een statment maken!</p>";
+							}
 						} else {
-							// een andere level dan 0, 1 of 2
-							echo "<p>OOPS, er is iets fout gegaan!</p>";
 
+							echo "<p class='error'>Niet alle velden zijn ingevuld!</p>";
 						}
 					} else {
-						//login incorrect, terug naar het login-formulier (alleen login form als je probeerde inteloggen bij aanmeld_login)
-						header("Location:login.php");
-					
+						echo "<p class='error'>U heeft het formulier niet ingevuld.</p>";
 					}
 				} else {
-
-					echo "<p>Niet alle velden zijn ingevuld!</p>";
-					//exit;
+					echo "<p class='error'>We hebben geen data binnen.</p>";
 				}
 			?>
 		</nav>
