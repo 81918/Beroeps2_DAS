@@ -2,6 +2,7 @@
 session_start();
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@ session_start();
 		if (isset($_POST['submit'])) {
 			
 			// variablen
-			$beschrijving = mysqli_real_escape_string($mysqli, htmlentities( $_POST['beschrijving'] ) );
+			$beschrijving = $_POST['beschrijving'];
 			$id = $_POST['id'];
 
 			// check of de key van het formulier is opgestuurd en het zelfe is het session variable
@@ -39,72 +40,64 @@ session_start();
 					// check of de id wel een nummer is
 					if (is_numeric($id)) {
 
-						// check of beschrijving wel is ingevuld
-						if (strlen($beschrijving) > 0) {
+						// variablen
+						$beschrijving = mysqli_real_escape_string($mysqli, htmlentities( $_POST['beschrijving'] ) );
 
-							// query
-							$query = "SELECT * FROM DAS_productbeschrijving WHERE product_id = ?";
+						// query
+						$query = "SELECT * FROM DAS_productbeschrijving WHERE product_id = ?";
 
-							// maak prepare statment
-							$stmt = mysqli_stmt_init($mysqli);
+						// maak prepare statment
+						$stmt = mysqli_stmt_init($mysqli);
 
-							// voorberijden op prepare statment
-							if (mysqli_stmt_prepare($stmt, $query)) {
-								
-								mysqli_stmt_bind_param($stmt, "i", $id);
+						// voorberijden op prepare statment
+						if (mysqli_stmt_prepare($stmt, $query)) {
+							
+							mysqli_stmt_bind_param($stmt, "i", $id);
 
-								$result1 = mysqli_stmt_execute($stmt);
-								// check of query niet is uigevoerd
-								if (!$result1) {
+							$result1 = mysqli_stmt_execute($stmt);
+							// check of query niet is uigevoerd
+							if (!$result1) {
 
-									echo "<p class='error'>Er ging iets fout, beschrijving kon niet gevonden worden!</p>";
-
-								}
+								echo "<p class='error'>Er ging iets fout, beschrijving kon niet gevonden worden!</p>";
 
 							} else {
+								// check of de query succesvol is uit gevoerd
+								if ($result1) {
 
-								echo "<p class='error'>Kon geen voorberijding maken op prepare statement</p>";
-							}
+									// query
+									$query2 = "UPDATE DAS_productbeschrijving SET beschrijving = ? WHERE product_id = ?";
 
+									// voorberijden op prepare statment
+									if (mysqli_stmt_prepare($stmt, $query2)) {
+										
+										// verbind variable met prepare statements
+										mysqli_stmt_bind_param($stmt, "si", $beschrijving, $id);
 
-							// check of de query succesvol is uit gevoerd
-							if ($result1) {
+										// voer de query uit
+										$result2 = mysqli_stmt_execute($stmt);
 
-								// query
-								$query2 = "UPDATE DAS_productbeschrijving SET beschrijving = ? WHERE product_id = ?";
+										// check of het goed is uitgevoerd
+										if ($result2) {
 
-								// voorberijden op prepare statment
-								if (mysqli_stmt_prepare($stmt, $query2)) {
-									
-									// verbind variable met prepare statements
-									mysqli_stmt_bind_param($stmt, "si", $beschrijving, $id);
+											echo "<p class='no_error'>Beschrijving is veranderd.</p>";
 
-									// voer de query uit
-									$result2 = mysqli_stmt_execute($stmt);
+										} else {
 
-									// check of het goed is uitgevoerd
-									if ($result2) {
+											echo "<p class='error'>Er ging iets fout, beschrijving kon niet veranderd worden!</p>";
 
-										echo "<p class='no_error'>Beschrijving is veranderd.</p>";
-
+										}
 									} else {
 
-										echo "<p class='error'>Er ging iets fout, beschrijving kon niet veranderd worden!</p>";
-
+										echo "<p class='error'>Kon geen voorberijding maken op prepare statement</p>";
 									}
 								} else {
 
 									echo "<p class='error'>Kon geen voorberijding maken op prepare statement</p>";
 								}
-							} else {
-
-								echo "<p class='error'>Dit product bestaat niet!</p>";
-
-							}
-
+							} 
 						} else {
 
-							echo "<p class='error'>We missen een beschrijving.</p>";
+							echo "<p class='error'>Dit product bestaat niet!</p>";
 
 						}
 					} else {

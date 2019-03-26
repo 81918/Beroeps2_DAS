@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+	// controlleer time out 
+	if ((time() - 1800) > $_SESSION["timestamp"]) {
+
+		// te lang geleden, logout
+		header('Location:logout.php');
+
+	} else {
+
+		// kan hier blijven voor een half uur 
+		$_SESSION["timestamp"] = time();
+		
+	}
 ?>
 <!DOCTYPE html>
 <html>

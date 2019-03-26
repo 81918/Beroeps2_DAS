@@ -34,7 +34,7 @@ $_SESSION['token'] = $token;
 				// check of id is ingevuld
 				if (!empty($id) && isset($id)) {
 					// query zoek de product
-					$query1 = "SELECT * FROM DAS_products WHERE `id` = " . $id;
+					$query1 = "SELECT product_id FROM DAS_products WHERE `id` = " . $id;
 
 					// voer de query uit
 					$result1 = mysqli_query($mysqli, $query1);
