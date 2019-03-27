@@ -31,25 +31,36 @@ session_start();
 					</tr>
 					<tr>
 						<td>Geboortedatum:</td>
-						<td colspan="3"><input type="date" name="geboortedatum" min="1900-01-01" max="<?php
-							$i 		=	date('Y-m-d');
-							$i 		=	explode('-', $i);
-							$year	=	$i[0];
-							$month	=	$i[1];
-							$day	=	$i[2];
-							if ($year < 100)
-							{
-								echo 20 . $i[0] . '-' . $i[1] . '-' . $i[2];
+						<td colspan="3">
+							<?php
+							// dag
+							echo "<select>";
+							for ($i=0; $i < 31; $i++) { 
+
+								echo "<option value='" . $i . "'>" . $i . "</option>";
+
 							}
-							else if ($year < 1000)
-							{
-								echo 2 . $i[0] . '-' . $i[1] . '-' . $i[2];
+							echo "</select>";
+
+							//maand
+							echo "<select>";
+							for ($i=0; $i < 12; $i++) { 
+
+								echo "<option value='" . $i . "'>" . $i . "</option>";
+
 							}
-							else if ($year > 1000)
-							{
-								echo $i[0] . '-' . $i[1] . '-' . $i[2];
+							echo "</select>";
+
+							//jaar
+							echo "<select>";
+							for ($i=1910; $i < date("Y"); $i++) { 
+
+								echo "<option value='" . $i . "'>" . $i . "</option>";
+
 							}
-							;?>"></td>
+							echo "</select>";
+							?>
+						</td>
 					</tr>
 					<tr>
 						<td>Gebruikersnaam:</td>
@@ -57,29 +68,27 @@ session_start();
 					</tr>
 					<tr>
 						<td>Wachtwoord:</td>
-						<td colspan="3"><input type="password" name="wachtwoord" maxlength="40"></td>
+						<td colspan="3"><input type="password" name="wachtwoord1" maxlength="40"></td>
 					</tr>
 					<tr>
-						<td>e-mail:</td>
+						<td>Wachtwoord opnieuw:</td>
+						<td colspan="3"><input type="password" name="wachtwoord2" maxlength="40"></td>
+					</tr>
+					<tr>
+						<td>E-mail:</td>
 						<td colspan="3"><input type="email" name="email" maxlength="50"></td>
 					</tr>
 					<tr>
-						<td>land:</td>
-						<td colspan="3"><input type="text" name="land" maxlength="40"></td>
-					</tr>
-					<tr>
-						<td>provincie:</td>
-						<td colspan="3"><input type="text" name="provincie" maxlength="40"></td>
-					</tr>
-					<tr>
-						<td>stad:</td>
+						<td>Stad:</td>
 						<td colspan="3"><input type="text" name="stad" maxlength="40"></td>
 					</tr>
 					<tr>
-						<td>postcode:</td>
-						<td><input type="text" name="postcode"></td>
+						<td>Straat:</td>
+						<td colspan="3"><input type="text" name="straat" maxlength="40"></td>
 						<td>Huisnummer en toevoeging</td>
-						<td><input type="text" name="ht" maxlength="5"></td>
+						<td><input type="text" name="huintoegv" maxlength="5"></td>
+						<td>Postcode:</td>
+						<td><input type="text" name="postcode"></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>

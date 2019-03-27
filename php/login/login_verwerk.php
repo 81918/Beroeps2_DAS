@@ -60,6 +60,11 @@
 
 										$_SESSION['level'] = $level;
 
+										mysqli_stmt_close($stmt);
+
+										// genereer een nieuw session id
+										session_regenerate_id();
+
 										if($_SESSION['level'] == 1) {
 
 											// redirect naar index
