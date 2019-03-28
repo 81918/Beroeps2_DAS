@@ -5,18 +5,11 @@ session_start();
 <html>
 <head>
 	<title></title>
-	<style>
-		form
-		{
-			display: inline-block;
-		}
-	</style>
 </head>
 <body>
 	<?php
 	if($_SESSION['level'] == 0)
 	{
-		echo $_SESSION['level'];
 	?>
 		<div class="aanmeld_verwerk.php">
 			<form action="aanmeld_verwerk.php" method="post" id="aanmeld">
@@ -30,35 +23,39 @@ session_start();
 						<td colspan="3"><input type="text" name="achternaam"></td>
 					</tr>
 					<tr>
-						<td>Geboortedatum:</td>
+						<td>Geboortedatum (DD/MM/YYYY):</td>
 						<td colspan="3">
 							<?php
-							// dag
-							echo "<select>";
-							for ($i=0; $i < 31; $i++) { 
+								// dag
+								echo "<select name='geboortedatum1' form='aanmeld'>";
+								echo "<option selected> - - - - </option>";
+								for ($i = 1; $i < 31; $i++) { 
 
-								echo "<option value='" . $i . "'>" . $i . "</option>";
+									echo "<option value='" . $i . "'>" . $i . "</option>";
 
-							}
-							echo "</select>";
+								}
+								echo "</select>";
 
-							//maand
-							echo "<select>";
-							for ($i=0; $i < 12; $i++) { 
+								//maand
+								echo "<select name='geboortedatum2' form='aanmeld'>";
+								echo "<option selected> - - - - </option>";
+								for ($i = 1; $i < 12; $i++) { 
 
-								echo "<option value='" . $i . "'>" . $i . "</option>";
+									echo "<option value='" . $i . "'>" . $i . "</option>";
 
-							}
-							echo "</select>";
+								}
+								echo "</select>";
 
-							//jaar
-							echo "<select>";
-							for ($i=1910; $i < date("Y"); $i++) { 
+								//jaar
+								echo "<select name='geboortedatum3' form='aanmeld'>";
+								echo "<option selected> - - - - </option>";
+								$date = date("Y");
+								for ($i = $date; $i > 1910; $i--) { 
 
-								echo "<option value='" . $i . "'>" . $i . "</option>";
+									echo "<option value='" . $i . "'>" . $i . "</option>";
 
-							}
-							echo "</select>";
+								}
+								echo "</select>";
 							?>
 						</td>
 					</tr>
@@ -94,6 +91,7 @@ session_start();
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 						<td><input type="submit" name="submit" value="meld aan"></td>
 					</tr>
 				</table>
@@ -101,15 +99,15 @@ session_start();
 		</div>
 	<?php
 		}
-		elseif($_SESSION['level'] == 1) {
+		elseif($_SESSION['level'] == 1 || $_SESSION['level'] == 2) {
 			// 
 			echo "<h1>OOPS!</h1>";
-			echo "<p class='error'>U hoord hier niet te zijn! <a href='../../index.php'>Ga naar home</a></p>";
+			echo "<p class='error'>U bent al ingelogt! <a href='../../index.php'>Ga naar home</a></p>";
 		}
 		else
 		{
 			echo "<h1>OOPS!</h1>";
-			echo "<p class='error'>U hoord hier niet te zijn! <a href='../index.php'>Ga naar uitlees</a>.</p>";
+			echo "<p class='error'>Er is iets fouts gegaan! <a href='../index.php'>Ga naar uitlees</a>.</p>";
 		}
 
 	?>
