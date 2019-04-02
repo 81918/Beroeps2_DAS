@@ -11,17 +11,15 @@ $_SESSION['token'] = $token;
 <!DOCTYPE html>
 <html>
 <head>
-	<title>opdracht 7</title>
+	<title>Login</title>
 </head>
 <body>
 	<?php
-	$_SESSION['level'] = 2;
 	if ($_SESSION['level'] == 0){
 
 	?>
 	<form action="login_verwerk.php" method="post">
 		<input type="hidden" name="csrf_token" value="<?php echo $token;?>">
-		<!-- stuur de key door -->
 		<table>
 			<tr>
 				<td><label for="gebruikersnaam">Gebruikersnaam:</label></td>
@@ -40,7 +38,7 @@ $_SESSION['token'] = $token;
 	<?php
 	} else {
 		echo "<h1>OOPS</h1>";
-		echo "<p class='error'>U bent al ingelogd</p>"; 
+		echo "<p class='error'>U bent al ingelogd</p>";
 	} 
 	?>
 </body>

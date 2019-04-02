@@ -61,33 +61,54 @@ session_start();
 					</tr>
 					<tr>
 						<td>Gebruikersnaam:</td>
-						<td colspan="3"><input type="text" name="gebruikersnaam" maxlength="32"></td>
+						<td><input type="text" name="gebruikersnaam" maxlength="32"></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>Wachtwoord:</td>
-						<td colspan="3"><input type="password" name="wachtwoord1" maxlength="40"></td>
+						<td><input type="password" name="wachtwoord1" maxlength="40"></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>Wachtwoord opnieuw:</td>
-						<td colspan="3"><input type="password" name="wachtwoord2" maxlength="40"></td>
+						<td><input type="password" name="wachtwoord2" maxlength="40"></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>Moet minstens 1 cijfer van 0 t/m 9, letters a-z, minstns een hoofdletter en een van deze tekens !@#$%^&*-</td>
 					</tr>
 					<tr>
 						<td>E-mail:</td>
-						<td colspan="3"><input type="email" name="email" maxlength="50"></td>
+						<td><input type="email" name="email" maxlength="50"></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>Stad:</td>
-						<td colspan="3"><input type="text" name="stad" maxlength="40"></td>
+						<td><input type="text" name="stad" maxlength="40"></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>Straat:</td>
-						<td colspan="3"><input type="text" name="straat" maxlength="40"></td>
+						<td><input type="text" name="straat" maxlength="40"></td>
 						<td>Huisnummer en toevoeging</td>
 						<td><input type="text" name="huintoegv" maxlength="5"></td>
 						<td>Postcode:</td>
 						<td><input type="text" name="postcode"></td>
 					</tr>
 					<tr>
+						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>

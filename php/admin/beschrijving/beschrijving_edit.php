@@ -71,10 +71,10 @@ $_SESSION['token'] = $token;
 							<input type="text" name="csrf_token" value="<?php echo $token; ?>" hidden>
 
 							<table>
-							<tr>
-							<td><textarea name="beschrijving" form="beschrijving"><?php echo html_entity_decode($fbeschrijving);?></textarea></td>
-							<td><input type="submit" name="submit" value="Verander beschrijving"></td>
-							</tr>
+								<tr>
+									<td><textarea name="beschrijving" form="beschrijving"><?php echo html_entity_decode($fbeschrijving); ?></textarea></td>
+									<td><input type="submit" name="submit" value="Verander beschrijving"></td>
+								</tr>
 							</table>
 
 							</form>

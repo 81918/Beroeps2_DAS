@@ -32,15 +32,24 @@
 			!empty($stad) && !empty($straat) &&
 			!empty($huintoegv) && !empty($postcode)) {
 
-			if (!preg_match("/[a-zA-Z])", $gebruikersnaam)) {
+			if (preg_match("/[a-zA-Z]/", $gebruikersnaam)) {
 
 				// check of het een echte email is
 				if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 				{
 
 					// check of leeftijd klopt
-					if (is_numeric($_POST['leeftijd']) && $_POST['leeftijd'] >= 0 && $_POST['leeftijd'] <= 100)
+					if (is_numeric($geboortedatum1) && 
+						is_numeric($geboortedatum2) && 
+						is_numeric($geboortedatum3) && 
+						$geboortedatum1 <= 12 &&
+						$geboortedatum1 >= 1 &&
+						$geboortedatum2 <= 12 &&
+						$geboortedatum2 >= 1 &&
+						$geboortedatum3 <= date("Y") &&
+						$geboortedatum3 >= 1910)
 					{
+						$geboortedatum = $geboortedatum3  . "-" . $geboortedatum2 . "-" . $geboortedatum1;
 						// check of wachtwoorden gelijk zijn.
 						if ($wachtwoord1 == $wachtwoord2) {
 
@@ -59,9 +68,13 @@
 									// haal spaces weg die naast elkaar staan
 									$straat = preg_replace('/\s+/', ' ',$straat);
 
-									if (preg_match("/[1-9][0-9]{3}[A-Za-z]{2}/", $postcode)) {
+									$postcode = strtoupper($postcode);
+									if (preg_match("/[1-9][0-9]{3}[A-Z]{2}/", $postcode)) {
 
 										if (preg_match("/[\sA-Za-z0-9]/", $huintoegv)) {
+
+											//lees het config-bestand
+											require('../../config_beroeps2.inc.php');
 
 											// haal spaces weg die naast elkaar staan
 											$huintoegv = preg_replace('/\s+/', ' ',$huintoegv);
@@ -69,24 +82,37 @@
 											(id, voornaam, achternaam, geboortedatum,
 											gebruikersnaam, wachtwoord, email, land,
 											provincie, stad, postcode, ht, level)
-											VALUES (NULL, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+											VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
-											if (mysqli_query($mysqli, $query)) {
+											// berijd prepare statment voor
+											$stmt = mysqli_stmt_init($mysqli);
+
+											// berijd statment voor
+											mysqli_stmt_prepare($stmt, $query);
+											
+											// verbind de vraagtekens in de query met een variable in.
+											mysqli_stmt_bind_param("sssssssssss", $voornaam, $achternaam,
+											$geboortedatum, $gebruikersnaam, $wachtwoord1,
+											$email, $stad, $straat, $huintoegv, $postcode);
+
+											$voeruit = mysqli_stmt_execute($stmt);
+
+
+											if ($voeruit) {
 
 												echo "<p class='no_error'> U bent sucsessvol aangemeld.</p>";
 
-											}
-											else {
+											} else {
 												echo "<p class='error'Er was een probleem we konden uw account niet aanmaken.</p>";
 											}
 										} else {
-											echo "<p class='error'Er was een probleem we konden uw account niet aanmaken.</p>";
+											echo "<p class='error'>De toevoeging/huisnummer die u gegeven hebt komt niet overeen met onze eisen.</p>";
 										}
 									} else {
-										echo "<p class='error'Er was een probleem we konden uw account niet aanmaken.</p>";
+										echo "<p class='error'>De postcode die u gegeven hebt komt niet overeen met onze eisen.</p>";
 									}
 								} else {
-									echo "<p class='error'Er was een probleem we konden uw account niet aanmaken.</p>";
+									echo "<p class='error'>De straat die u gegeven hebt komt niet overeen met onze eisen.</p>";
 								}
 							} else {
 								echo "<p class='error'>De wachtwoorden heeft voldoet niet aan de eisen.</p>";
@@ -110,12 +136,7 @@
 
 		echo "<p class='error'>Er was geen informatie verzonden.</p>";
 
-	} var_dump($voornaam, $achternaam,
-			$geboortedatum1, $geboortedatum2,
-			$geboortedatum3, $wachtwoord1,
-			$wachtwoord2, $email,
-			$stad, $straat,
-			$huintoegv, $postcode);
+	}
 
 	?>
 </body>
