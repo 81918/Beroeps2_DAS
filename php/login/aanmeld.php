@@ -8,8 +8,7 @@ session_start();
 </head>
 <body>
 	<?php
-	if($_SESSION['level'] == 0)
-	{
+	if($_SESSION['level'] == 0) {
 	?>
 		<div class="aanmeld_verwerk.php">
 			<form action="aanmeld_verwerk.php" method="post" id="aanmeld">
@@ -29,7 +28,7 @@ session_start();
 								// dag
 								echo "<select name='geboortedatum1' form='aanmeld'>";
 								echo "<option selected> - - - - </option>";
-								for ($i = 1; $i < 31; $i++) { 
+								for ($i = 1; $i <= 31; $i++) { 
 
 									echo "<option value='" . $i . "'>" . $i . "</option>";
 
@@ -39,7 +38,7 @@ session_start();
 								//maand
 								echo "<select name='geboortedatum2' form='aanmeld'>";
 								echo "<option selected> - - - - </option>";
-								for ($i = 1; $i < 12; $i++) { 
+								for ($i = 1; $i <= 12; $i++) { 
 
 									echo "<option value='" . $i . "'>" . $i . "</option>";
 
@@ -50,7 +49,7 @@ session_start();
 								echo "<select name='geboortedatum3' form='aanmeld'>";
 								echo "<option selected> - - - - </option>";
 								$date = date("Y");
-								for ($i = $date; $i > 1910; $i--) { 
+								for ($i = $date; $i >= 1910; $i--) { 
 
 									echo "<option value='" . $i . "'>" . $i . "</option>";
 
