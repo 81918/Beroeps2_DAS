@@ -6,7 +6,7 @@ session_start();
 session_destroy();
 
 //ga naar de inlogpagina
-header("location:login.php")
+header("location:../../index.php")
 ?>
 <!doctype html>
 <html>

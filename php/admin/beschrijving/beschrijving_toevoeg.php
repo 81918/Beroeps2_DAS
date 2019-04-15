@@ -34,67 +34,58 @@ $_SESSION['token'] = $token;
 				// check of id is ingevuld
 				if (!empty($id) && isset($id)) {
 					// query zoek de product
-					$query1 = "SELECT product_id FROM DAS_products WHERE `id` = ?";
+					$query1 = "SELECT product_id FROM DAS_products WHERE `id` = " . $id;
 
-					if (mysqli_stmt_bind_param($stmt,"s", $id)) {
+					// voer de query uit
+					$result1 = mysqli_query($mysqli, $query1);
 
-						if (mysqli_stmt_execute($stmt)) {
+					// check of er precies 1 product is
+					if (mysqli_num_rows($result1) == 1) {
 
-							mysqli_stmt_store_result($stmt);
+						// query zoek de beschrijving
+						$query2 = "SELECT * FROM DAS_productbeschrijving WHERE `product_id` = " . $id;
 
-							if (mysqli_stmt_num_rows($stmt) == 0) {
+						// check of de query succesvol is uitgevoerd
+						$result2 = mysqli_query($mysqli, $query2);
 
+						// check of result goed is uitgevoe
+						if ($result2) {
 
-								// query zoek de beschrijving
-								$query2 = "SELECT * FROM DAS_productbeschrijving WHERE `product_id` = " . $id;
+							// check of er geen beschrijvingen zijn
+							if (mysqli_num_rows($result2) == 0) {
 
-								// check of de query succesvol is uitgevoerd
-								$result2 = mysqli_query($mysqli, $query2);
+								$row = mysqli_fetch_array($result2);
 
-								// check of result goed is uitgevoe
-								if ($result2) { 
-
-									// check of er geen beschrijvingen zijn
-									if (mysqli_num_rows($result2) == 0) {
-
-										$row = mysqli_fetch_array($result2);
-
-										// form
-										?>
-										<form action="beschrijving_toevoeg_verwerk.php" method="post" id="beschrijving">
-											<input type="number" name="id" value="<?php echo $row['product_id']; ?>" hidden>
-											<input type="text" name="csrf_token" value="<?php echo $token; ?>" hidden>
-											<table>
-												<tr>
-												<td><textarea name="beschrijving" form="beschrijving"></textarea></td>
-												</tr>
-												<tr>
-													<td><input type="submit" name="submit" value="Voeg beschrijving toe"></td>
-												</tr>
-											</table>
-										</form>
-										<?php
-									} else {
-
-										echo "<p class='error'>Dit product heeft al een beschrijving!</p>";
-
-									}
-								} else {
-									echo "<p class='error'>Er is een probleem! Query kan word niet goed uitgevoerd.</p>";
-								}
+								// form
+								?>
+								<form action="beschrijving_toevoeg_verwerk.php" method="post" id="beschrijving">
+									<input type="number" name="id" value="<?php echo $row['product_id']; ?>" hidden>
+									<input type="text" name="csrf_token" value="<?php echo $token; ?>" hidden>
+									<table>
+										<tr>
+										<td><textarea name="beschrijving" form="beschrijving"></textarea></td>
+										</tr>
+										<tr>
+											<td><input type="submit" name="submit" value="Voeg beschrijving toe"></td>
+										</tr>
+									</table>
+								</form>
+								<?php
 							} else {
-								echo "<p class='error'>Er is een probleem! We hebben geen ID gekregen.</p>";
+
+								echo "<p class='error'>Dit product heeft al een beschrijving!</p>";
+
 							}
 						} else {
-
-							echo "";
-
+							echo "<p class='error'>Er is een probleem! Query kan word niet goed uitgevoerd.</p>";
 						}
 					} else {
-						echo "";
+						echo "<p class='error'>Er is een probleem! We hebben geen ID gekregen.</p>";
 					}
 				} else {
-					echo "";
+
+					echo "<p class='error'>Product bestaat niet!</p>";
+
 				}
 			} else {
 				echo "<p class='error'>Er is een probleem! De id die is opgegeven is geen nummer</p>";

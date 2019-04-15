@@ -7,12 +7,19 @@ session_start();
 	<!-- Jquery Plugin -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<!-- Bootstrap Plugin-->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css">
 	<script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>
 
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="css/mdb.css">
+
 	<!-- Custom Links/Plugin -->
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	
 
 	<title>Home</title>
 </head>
@@ -53,10 +60,10 @@ session_start();
 						<?php
 						
 						// controlleer time out 
-						if ((time() - 1800) > $_SESSION["timestamp"] && !empty($_SESSION['timestamp'])) {
+						if ((time() - 1800) > $_SESSION["timestamp"]) {
 
 							// te lang geleden, logout
-							header('Location:php/login/logout.php');
+							header('Location:logout.php');
 
 						} else {
 
@@ -91,7 +98,7 @@ session_start();
 </nav>
 <!-- Einde Navigatie-->
 
-
+<main>
 	<div id="HeaderMain">
 		<div id="Promo_Vid">
 			<iframe width="720" height="360" src="https://www.youtube.com/embed/tgbNymZ7vqY">
@@ -132,6 +139,112 @@ session_start();
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
 	</div>
+	<div class="container">
+        <!--Section: Contact v.2-->
+        <section class="section">
+
+            <!--Section heading-->
+            <h2 class="section-heading h1 pt-4">Neem Contact met ons op!</h2>
+            <!--Section description-->
+            <p class="section-description">Heeft u Vragen die niet worden beantwoord op de site?<br>Neem dan gerust contact met ons op!</p>
+
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-8 col-xl-9">
+                    <form id ="contact-form" name="contact-form" action="mail.php" method="POST"  onsubmit="return validateForm()" >
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-6">
+                                <div class="md-form">
+                                    <div class="md-form">
+                                        <input type="text" id="name" name="name" class="form-control">
+                                        <label for="name" class="">Naam:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-6">
+                                <div class="md-form">
+                                    <div class="md-form">
+                                        <input type="text" id="email" name="email" class="form-control">
+                                        <label for="email" class="">Uw Email: </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input type="text" id="subject" name="subject" class="form-control">
+                                    <label for="subject" class="">Onderwerp:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+                            <!--Grid column-->
+                            <div class="col-md-12">
+
+                                <div class="md-form">
+                                    <textarea type="text" id="message" name="message" class="md-textarea"></textarea>
+                                    <label for="message">Bericht:</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+                    </form>
+                    <div class="center-on-small-only">
+                        <a class="btn btn-primary" onclick="validateForm()">Versturen</a>
+                    </div> <div class="status" id="status"></div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 col-xl-3" >
+                    <ul class="contact-icons" id="dot">
+                        <li><i class="fa fa-map-marker fa-2x"></i>
+                            <p>Rotterdam, 1122AA, NL</p>
+                        </li>
+
+                        <li><i class="fa fa-phone fa-2x"></i>
+                            <p>010-23456789</p>
+                        </li>
+
+                        <li><i class="fa fa-envelope fa-2x"></i>
+                            <p>contact@AQSpecialist.com</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+            </div>
+        </section>
+        <!--Section: Contact v.2-->
+    </div>
+</main>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!--Custom scripts-->
+<script src="js/validate.js"></script>
 
 </body>
 </html>
