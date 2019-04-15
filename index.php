@@ -86,7 +86,6 @@ session_start();
 <!--            <input class="form-control mr-sm-2" type="search" placeholder="Zoeken" aria-label="Search">-->
 <!--            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Zoeken</button>-->
 <!--        </form>-->
-		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="nav-item">
 				<a class="nav-link" href="#">
