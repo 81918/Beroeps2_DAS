@@ -3,6 +3,8 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
+<!--Product Overzicht = pd_ov-->
+<!--Product Toevoegen = pd_tv-->
 <head>
 	<title>product toevoegen melding</title>
 	<link rel="stylesheet" type="text/css" href="../../css/style.css">
@@ -28,16 +30,23 @@ session_start();
 						<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<div class="collapse navbar-collapse" id="navbarColor01">
+			<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item ">
 						<a class="nav-link" href="index.php">Home </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="product/product_toevoeg.php">Toevoegen</a>
+						<a class="nav-link" href="product/product_toevoeg.php">Product toevoegen</a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="uitlees_admin.php">Uitlees<span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item ">
+						<a class="nav-link btn btn-secondary margin_reset" href="#">Logout</a>
 					</li>
 				</ul>
 			</div>
@@ -45,7 +54,7 @@ session_start();
 	</header>
 	
 	<main>
-		<div id="pd_ov">
+		<div class="pd_ov">
 			
 				<?php
 				if ($_SESSION['level'] == 2) {
@@ -129,7 +138,7 @@ session_start();
 	<footer>
 	</footer>
 
-	<script src="/jq/jquery-3.3.1.js"></script>
+	<script src="../../jq/jquery-3.3.1.js"></script>
 
 </body>
 </html>

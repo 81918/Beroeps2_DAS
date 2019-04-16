@@ -24,6 +24,10 @@
   background-size: cover; 
 }
 /*---====+############ Class #############+====---*/
+.right
+{
+  float: right;
+}
 
 /*Font*/
 .pixel
@@ -71,6 +75,7 @@
 {
 	text-align: center;
 }
+
 /*########### Login ###########*/
 
 :root {

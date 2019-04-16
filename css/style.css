@@ -49,10 +49,10 @@ a
 	text-decoration: none;
 }/**/
 
-input{
+.input{
 			width: 300px;
 			padding-left: 50px;
-		}/**/
+		}
 /*#############################################################################
 							N A V I G A T I E
 #############################################################################*/
@@ -93,9 +93,8 @@ td
 							O V E R Z I C H T
 #############################################################################*/
 
-#pd_ov
+.pd_ov
 {
-	
 	background-color: #d8d8d8;
 	margin: auto;
 	padding: 10px;
@@ -105,6 +104,12 @@ td
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   	text-align: center;
   	border-radius: 10px;
+
+}
+
+.pd_tv
+{
+	margin: auto;
 }
 
 .td
@@ -118,11 +123,21 @@ td
 	border-radius: 10px;
 }
 
+.text_center
+{
+	text-align: center;
+}
 
 
+.btn-block
+{
+	margin-top: 10px !important;
+}
 
-
-
-
+.margin_reset
+{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 
 
